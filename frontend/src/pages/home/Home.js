@@ -1,4 +1,3 @@
-"use client"
 import { useState, useEffect, useRef } from "react"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
@@ -267,18 +266,18 @@ function Home() {
   return (
     <div className={`home-container ${isVisible ? "visible" : ""}`}>
       {/* Hero Section */}
-      <section className="hero-section">
-        <Slider {...heroSettings} className="hero-slider">
+      <section className="hero-section-home">
+        <Slider {...heroSettings} className="hero-slider-home">
           {heroSlides.map((slide, index) => (
-            <div key={index} className="hero-slide">
-              <div className="hero-image-container">
-                <img src={slide.image || "/placeholder.svg"} alt={slide.title} className="hero-image" />
-                <div className="hero-overlay"></div>
+            <div key={index} className="hero-slide-home">
+              <div className="hero-image-container-home">
+                <img src={slide.image || "/placeholder.svg"} alt={slide.title} className="hero-image-home" />
+                <div className="hero-overlay-home"></div>
               </div>
-              <div className="hero-content">
-                <h1 className="slide-title">{slide.title}</h1>
-                <p className="slide-subtitle">{slide.subtitle}</p>
-                <button className="cta-button">
+              <div className="hero-content-home">
+                <h1 className="slide-title-home">{slide.title}</h1>
+                <p className="slide-subtitle-home">{slide.subtitle}</p>
+                <button className="cta-button-home">
                   {slide.cta} <ArrowRight size={16} />
                 </button>
               </div>
