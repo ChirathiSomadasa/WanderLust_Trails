@@ -321,11 +321,11 @@ function Home() {
         </Slider>
       </section>
       {/* Parallax Section */}
-      <section className="parallax-section">
-        <div className="parallax-content">
+      <section className="parallax-section-home">
+        <div className="parallax-content-home">
           <h2>Experience the Journey of a Lifetime</h2>
           <p>Unforgettable adventures await in the world's most breathtaking destinations</p>
-          <button className="parallax-button">Start Your Adventure</button>
+          <button className="parallax-button-home">Start Your Adventure</button>
         </div>
       </section>
       {/* Why Choose Us Section */}

@@ -172,7 +172,7 @@ const About = () => {
           ))}
         </div>
 
-        <div className="cta-section fade-in">
+        <div className="cta-section-about fade-in">
           <h3>Start Your Adventure Today</h3>
           <p>Let us help you create memories that will last a lifetime.</p>
           <button className="cta-button pulse-animation">Contact Our Team</button>

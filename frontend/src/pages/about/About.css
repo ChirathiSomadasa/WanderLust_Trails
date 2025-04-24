@@ -424,10 +424,10 @@
   }
   
   /* CTA Section */
-  .cta-section {
+  .cta-section-about {
     text-align: center;
     padding: 60px 20px;
-    background-color: #f8f9fa;
+    background-color: #f8f9fa !important;
     border-radius: 8px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
