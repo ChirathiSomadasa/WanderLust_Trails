@@ -13,17 +13,16 @@ import {
   CheckCircle,
   AlertCircle,
 } from "lucide-react";
-import office1 from "../../images/office1.jpg"
-import office2 from "../../images/office2.jpg"
-import office3 from "../../images/office3.jpg"
-
+import office1 from "../../images/office1.jpg";
+import office2 from "../../images/office2.jpg";
+import office3 from "../../images/office3.jpg";
 
 const Contact = () => {
   const [scrollY, setScrollY] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
+    phone_number: "", // Updated from "phone" to "phone_number"
     subject: "",
     message: "",
   });
@@ -38,6 +37,7 @@ const Contact = () => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
+
     // Add scroll event listener
     window.addEventListener("scroll", handleScroll);
 
@@ -80,62 +80,60 @@ const Contact = () => {
     }
   };
 
-  const validateForm = () => {
-    const newErrors = {};
-    // Name validation
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-    // Email validation
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
-    }
-    // Subject validation
-    if (!formData.subject.trim()) {
-      newErrors.subject = "Subject is required";
-    }
-    // Message validation
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // Simulate form submission
-      setFormStatus({
-        submitted: true,
-        success: true,
-        message: "Thank you for your message! We'll get back to you soon.",
+    try {
+      // Send form data to the backend
+      const response = await fetch("http://localhost:5000/api/contact/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
-      // Reset form after successful submission
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
-      });
-      // Reset form status after 5 seconds
-      setTimeout(() => {
+
+      const result = await response.json();
+
+      if (response.ok) {
+        // Handle successful submission
         setFormStatus({
-          submitted: false,
-          success: false,
+          submitted: true,
+          success: true,
+          message: "Thank you for your message! We'll get back to you soon.",
+        });
+        // Reset form after successful submission
+        setFormData({
+          name: "",
+          email: "",
+          phone_number: "", // Reset phone_number
+          subject: "",
           message: "",
         });
-      }, 5000);
-    } else {
+      } else {
+        // Handle backend errors
+        setFormStatus({
+          submitted: true,
+          success: false,
+          message: result.error || "An error occurred while submitting the form.",
+        });
+      }
+    } catch (error) {
+      // Handle network or other errors
       setFormStatus({
         submitted: true,
         success: false,
-        message: "Please fix the errors in the form.",
+        message: "Failed to connect to the server. Please try again later.",
       });
     }
+
+    // Reset form status after 5 seconds
+    setTimeout(() => {
+      setFormStatus({
+        submitted: false,
+        success: false,
+        message: "",
+      });
+    }, 5000);
   };
 
   const contactInfo = [
@@ -194,11 +192,14 @@ const Contact = () => {
         <div className="container">
           <div className="contact-intro fade-in">
             <h2>
-              Let's Start Your <span className="highlight-contact">Adventure</span> Together
+              Let's Start Your{" "}
+              <span className="highlight-contact">Adventure</span> Together
             </h2>
             <p>
-              Have questions about our travel packages or need a custom itinerary? Our team of travel experts is ready to
-              assist you in planning your perfect getaway. Reach out to us through any of the methods below.
+              Have questions about our travel packages or need a custom
+              itinerary? Our team of travel experts is ready to assist you in
+              planning your perfect getaway. Reach out to us through any of the
+              methods below.
             </p>
           </div>
           <div className="contact-grid">
@@ -221,7 +222,12 @@ const Contact = () => {
                 <h3>Connect With Us</h3>
                 <div className="social-icons">
                   {socialLinks.map((social, index) => (
-                    <a href={social.url} className="social-icon" key={index} aria-label={social.name}>
+                    <a
+                      href={social.url}
+                      className="social-icon"
+                      key={index}
+                      aria-label={social.name}
+                    >
                       {social.icon}
                     </a>
                   ))}
@@ -232,10 +238,17 @@ const Contact = () => {
             <div className="contact-form-container fade-in">
               <div className="form-header">
                 <h3>Send Us a Message</h3>
-                <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+                <p>
+                  Fill out the form below and we'll get back to you as soon as
+                  possible.
+                </p>
               </div>
               {formStatus.submitted && (
-                <div className={`form-message ${formStatus.success ? "success" : "error"}`}>
+                <div
+                  className={`form-message ${
+                    formStatus.success ? "success" : "error"
+                  }`}
+                >
                   {formStatus.success ? (
                     <CheckCircle className="message-icon" />
                   ) : (
@@ -256,7 +269,9 @@ const Contact = () => {
                     placeholder="Your full name"
                     className={errors.name ? "error" : ""}
                   />
-                  {errors.name && <span className="error-message">{errors.name}</span>}
+                  {errors.name && (
+                    <span className="error-message">{errors.name}</span>
+                  )}
                 </div>
                 <div className="form-row-contact">
                   <div className="form-group-contact">
@@ -270,15 +285,17 @@ const Contact = () => {
                       placeholder="Your email address"
                       className={errors.email ? "error" : ""}
                     />
-                    {errors.email && <span className="error-message">{errors.email}</span>}
+                    {errors.email && (
+                      <span className="error-message">{errors.email}</span>
+                    )}
                   </div>
                   <div className="form-group-contact">
-                    <label htmlFor="phone">Phone Number</label>
+                    <label htmlFor="phone_number">Phone Number</label>
                     <input
                       type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
+                      id="phone_number"
+                      name="phone_number"
+                      value={formData.phone_number} // Updated from "phone" to "phone_number"
                       onChange={handleChange}
                       placeholder="Your phone number (optional)"
                     />
@@ -295,7 +312,9 @@ const Contact = () => {
                     placeholder="How can we help you?"
                     className={errors.subject ? "error" : ""}
                   />
-                  {errors.subject && <span className="error-message">{errors.subject}</span>}
+                  {errors.subject && (
+                    <span className="error-message">{errors.subject}</span>
+                  )}
                 </div>
                 <div className="form-group-contact">
                   <label htmlFor="message">Message*</label>
@@ -308,7 +327,9 @@ const Contact = () => {
                     placeholder="Tell us more about your travel plans..."
                     className={errors.message ? "error" : ""}
                   ></textarea>
-                  {errors.message && <span className="error-message">{errors.message}</span>}
+                  {errors.message && (
+                    <span className="error-message">{errors.message}</span>
+                  )}
                 </div>
                 <button type="submit" className="submit-button-contact">
                   <Send className="button-icon" />
@@ -338,9 +359,12 @@ const Contact = () => {
       {/* Office Gallery */}
       <section className="office-gallery fade-in">
         <div className="container">
-          <h2>Visit Our <span className="highlight">Office</span></h2>
+          <h2>
+            Visit Our <span className="highlight">Office</span>
+          </h2>
           <p className="gallery-intro">
-            Our travel experts are ready to welcome you to our office. Stop by to discuss your travel plans in person.
+            Our travel experts are ready to welcome you to our office. Stop by
+            to discuss your travel plans in person.
           </p>
           <div className="gallery-grid">
             <div className="gallery-item">
@@ -361,7 +385,10 @@ const Contact = () => {
         <div className="container">
           <div className="cta-content">
             <h2>Ready for Your Next Adventure?</h2>
-            <p>Subscribe to our newsletter for exclusive travel deals and inspiration.</p>
+            <p>
+              Subscribe to our newsletter for exclusive travel deals and
+              inspiration.
+            </p>
             <form className="newsletter-form">
               <input type="email" placeholder="Your email address" required />
               <button type="submit">Subscribe</button>
