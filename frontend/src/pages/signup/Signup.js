@@ -1,4 +1,5 @@
 import { useState } from "react"
+import {Link} from "react-router-dom"
 import { Eye, EyeOff, User, Mail, Lock, ChevronRight } from "lucide-react"
 import "./Signup.css"
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
@@ -229,7 +230,7 @@ const Signup = () => {
                             </button>
 
                             <div className="login-link">
-                                Already have an account? <a href="/login">Log in</a>
+                                Already have an account? <Link to="/login">Log in</Link>
                             </div>
                         </form>
                     </div>
