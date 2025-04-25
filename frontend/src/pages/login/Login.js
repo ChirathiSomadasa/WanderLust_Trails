@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./Login.css";
 import { Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom"; 
 import axios from "axios"; 
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState(""); 
+  const { setIsAuthenticated } = useContext(AuthContext); // Destructure setIsAuthenticated from AuthContext
   const navigate = useNavigate(); 
 
   const handleChange = (e) => {
@@ -57,6 +59,12 @@ const Login = () => {
         const response = await axios.post("http://localhost:5000/api/user/login", formData, {
           withCredentials: true, // Send cookies with the request
         });
+
+        // Store token in localStorage
+        localStorage.setItem("auth_token", response.data.token);
+
+        // Update authentication state in AuthContext
+        setIsAuthenticated(true);
 
         // Handle successful login
         console.log("Login successful:", response.data);
