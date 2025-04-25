@@ -44,7 +44,7 @@ function Header() {
           {/* Right side - Auth buttons */}
           <div className="header-right">
             <Link to="/register">
-              <button className="primary-button">Sign Up</button>
+              <button className="primary-button-h">Sign Up</button>
             </Link>
             <Link to="/login">
               <button className="text-button-login">Login</button>

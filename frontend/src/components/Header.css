@@ -201,7 +201,7 @@ button {
 .text-button:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
-.primary-button {
+.primary-button-h {
   padding: 8px 16px;
   border-radius: 4px;
   background-color: #028388;
@@ -209,7 +209,7 @@ button {
   font-weight: 500;
   transition: background-color 0.2s;
 }
-.primary-button:hover {
+.primary-button-h:hover {
   background-color: #026e73;
 }
 .primary-button-h {
