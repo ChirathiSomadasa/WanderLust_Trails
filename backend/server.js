@@ -4,6 +4,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const userRoute = require("./routes/user_route");
+const contactRoute = require("./routes/contact_route");
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ mongoose
 
 // Routes
 app.use("/api/user", userRoute);
+app.use("/api/contact", contactRoute);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
