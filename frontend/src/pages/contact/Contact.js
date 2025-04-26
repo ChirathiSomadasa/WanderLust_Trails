@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import "./Contact.css";
+import { useState, useEffect } from "react"
+import "./Contact.css"
 import {
   MapPin,
   Phone,
@@ -12,76 +12,76 @@ import {
   Linkedin,
   CheckCircle,
   AlertCircle,
-} from "lucide-react";
-import office1 from "../../images/office1.jpg";
-import office2 from "../../images/office2.jpg";
-import office3 from "../../images/office3.jpg";
+} from "lucide-react"
+import office1 from "../../images/office1.jpg"
+import office2 from "../../images/office2.jpg"
+import office3 from "../../images/office3.jpg"
 
 const Contact = () => {
-  const [scrollY, setScrollY] = useState(0);
+  const [scrollY, setScrollY] = useState(0)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone_number: "", // Updated from "phone" to "phone_number"
     subject: "",
     message: "",
-  });
+  })
   const [formStatus, setFormStatus] = useState({
     submitted: false,
     success: false,
     message: "",
-  });
-  const [errors, setErrors] = useState({});
+  })
+  const [errors, setErrors] = useState({})
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
+      setScrollY(window.scrollY)
+    }
 
     // Add scroll event listener
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll)
 
     // Animation for elements to fade in when scrolled into view
     const observerOptions = {
       threshold: 0.1,
       rootMargin: "0px 0px -50px 0px",
-    };
+    }
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("fade-in-visible");
+          entry.target.classList.add("fade-in-visible")
         }
-      });
-    }, observerOptions);
+      })
+    }, observerOptions)
     document.querySelectorAll(".fade-in").forEach((el) => {
-      observer.observe(el);
-    });
+      observer.observe(el)
+    })
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScroll)
       document.querySelectorAll(".fade-in").forEach((el) => {
-        observer.unobserve(el);
-      });
-    };
-  }, []);
+        observer.unobserve(el)
+      })
+    }
+  }, [])
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setFormData({
       ...formData,
       [name]: value,
-    });
+    })
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors({
         ...errors,
         [name]: "",
-      });
+      })
     }
-  };
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       // Send form data to the backend
       const response = await fetch("http://localhost:5000/api/contact/add", {
@@ -90,9 +90,9 @@ const Contact = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      });
+      })
 
-      const result = await response.json();
+      const result = await response.json()
 
       if (response.ok) {
         // Handle successful submission
@@ -100,7 +100,7 @@ const Contact = () => {
           submitted: true,
           success: true,
           message: "Thank you for your message! We'll get back to you soon.",
-        });
+        })
         // Reset form after successful submission
         setFormData({
           name: "",
@@ -108,14 +108,14 @@ const Contact = () => {
           phone_number: "", // Reset phone_number
           subject: "",
           message: "",
-        });
+        })
       } else {
         // Handle backend errors
         setFormStatus({
           submitted: true,
           success: false,
           message: result.error || "An error occurred while submitting the form.",
-        });
+        })
       }
     } catch (error) {
       // Handle network or other errors
@@ -123,7 +123,7 @@ const Contact = () => {
         submitted: true,
         success: false,
         message: "Failed to connect to the server. Please try again later.",
-      });
+      })
     }
 
     // Reset form status after 5 seconds
@@ -132,9 +132,9 @@ const Contact = () => {
         submitted: false,
         success: false,
         message: "",
-      });
-    }, 5000);
-  };
+      })
+    }, 5000)
+  }
 
   const contactInfo = [
     {
@@ -155,35 +155,26 @@ const Contact = () => {
     {
       icon: <Clock />,
       title: "Working Hours",
-      details: [
-        "Monday - Friday: 9:00 AM - 6:00 PM",
-        "Saturday: 10:00 AM - 4:00 PM",
-        "Sunday: Closed",
-      ],
+      details: ["Monday - Friday: 9:00 AM - 6:00 PM", "Saturday: 10:00 AM - 4:00 PM", "Sunday: Closed"],
     },
-  ];
+  ]
 
   const socialLinks = [
     { icon: <Facebook />, url: "#", name: "Facebook" },
     { icon: <Instagram />, url: "#", name: "Instagram" },
     { icon: <Twitter />, url: "#", name: "Twitter" },
     { icon: <Linkedin />, url: "#", name: "LinkedIn" },
-  ];
+  ]
 
   return (
     <div className="contact-container">
       {/* Parallax Hero Section */}
       <section className="contact-parallax-section">
-        <div
-          className="parallax-bg-contact"
-          style={{ transform: `translateY(${scrollY * 0.5}px)` }}
-        ></div>
+        <div className="parallax-bg-contact" style={{ transform: `translateY(${scrollY * 0.5}px)` }}></div>
         <div className="parallax-overlay-contact"></div>
         <div className="parallax-content-contact">
           <h1 className="animate-title-contact">Contact Us</h1>
-          <p className="animate-subtitle-contact">
-            Get in touch with our travel experts
-          </p>
+          <p className="animate-subtitle-contact">Get in touch with our travel experts</p>
         </div>
       </section>
 
@@ -192,63 +183,49 @@ const Contact = () => {
         <div className="container">
           <div className="contact-intro fade-in">
             <h2>
-              Let's Start Your{" "}
-              <span className="highlight-contact">Adventure</span> Together
+              Let's Start Your <span className="highlight-contact">Adventure</span> Together
             </h2>
             <p>
-              Have questions about our travel packages or need a custom
-              itinerary? Our team of travel experts is ready to assist you in
-              planning your perfect getaway. Reach out to us through any of the
-              methods below.
+              Have questions about our travel packages or need a custom itinerary? Our team of travel experts is ready
+              to assist you in planning your perfect getaway. Reach out to us through any of the methods below.
             </p>
           </div>
-          <div className="contact-grid">
-            {/* Contact Information */}
-            <div className="contact-info fade-in">
-              <div className="info-cards">
-                {contactInfo.map((info, index) => (
-                  <div className="info-card" key={index}>
-                    <div className="info-icon">{info.icon}</div>
-                    <div className="info-content">
-                      <h3>{info.title}</h3>
-                      {info.details.map((detail, i) => (
-                        <p key={i}>{detail}</p>
-                      ))}
-                    </div>
+
+          <div className="contact-layout">
+            {/* Contact Information - Now in a vertical column */}
+            <div className="contact-info-column fade-in">
+              {contactInfo.map((info, index) => (
+                <div className="info-card" key={index}>
+                  <div className="info-icon">{info.icon}</div>
+                  <div className="info-content">
+                    <h3>{info.title}</h3>
+                    {info.details.map((detail, i) => (
+                      <p key={i}>{detail}</p>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
+
               <div className="social-links">
                 <h3>Connect With Us</h3>
                 <div className="social-icons">
                   {socialLinks.map((social, index) => (
-                    <a
-                      href={social.url}
-                      className="social-icon"
-                      key={index}
-                      aria-label={social.name}
-                    >
+                    <a href={social.url} className="social-icon" key={index} aria-label={social.name}>
                       {social.icon}
                     </a>
                   ))}
                 </div>
               </div>
             </div>
+
             {/* Contact Form */}
             <div className="contact-form-container fade-in">
               <div className="form-header">
                 <h3>Send Us a Message</h3>
-                <p>
-                  Fill out the form below and we'll get back to you as soon as
-                  possible.
-                </p>
+                <p>Fill out the form below and we'll get back to you as soon as possible.</p>
               </div>
               {formStatus.submitted && (
-                <div
-                  className={`form-message ${
-                    formStatus.success ? "success" : "error"
-                  }`}
-                >
+                <div className={`form-message ${formStatus.success ? "success" : "error"}`}>
                   {formStatus.success ? (
                     <CheckCircle className="message-icon" />
                   ) : (
@@ -269,9 +246,7 @@ const Contact = () => {
                     placeholder="Your full name"
                     className={errors.name ? "error" : ""}
                   />
-                  {errors.name && (
-                    <span className="error-message">{errors.name}</span>
-                  )}
+                  {errors.name && <span className="error-message">{errors.name}</span>}
                 </div>
                 <div className="form-row-contact">
                   <div className="form-group-contact">
@@ -285,9 +260,7 @@ const Contact = () => {
                       placeholder="Your email address"
                       className={errors.email ? "error" : ""}
                     />
-                    {errors.email && (
-                      <span className="error-message">{errors.email}</span>
-                    )}
+                    {errors.email && <span className="error-message">{errors.email}</span>}
                   </div>
                   <div className="form-group-contact">
                     <label htmlFor="phone_number">Phone Number</label>
@@ -295,7 +268,7 @@ const Contact = () => {
                       type="tel"
                       id="phone_number"
                       name="phone_number"
-                      value={formData.phone_number} // Updated from "phone" to "phone_number"
+                      value={formData.phone_number}
                       onChange={handleChange}
                       placeholder="Your phone number (optional)"
                     />
@@ -312,9 +285,7 @@ const Contact = () => {
                     placeholder="How can we help you?"
                     className={errors.subject ? "error" : ""}
                   />
-                  {errors.subject && (
-                    <span className="error-message">{errors.subject}</span>
-                  )}
+                  {errors.subject && <span className="error-message">{errors.subject}</span>}
                 </div>
                 <div className="form-group-contact">
                   <label htmlFor="message">Message*</label>
@@ -327,9 +298,7 @@ const Contact = () => {
                     placeholder="Tell us more about your travel plans..."
                     className={errors.message ? "error" : ""}
                   ></textarea>
-                  {errors.message && (
-                    <span className="error-message">{errors.message}</span>
-                  )}
+                  {errors.message && <span className="error-message">{errors.message}</span>}
                 </div>
                 <button type="submit" className="submit-button-contact">
                   <Send className="button-icon" />
@@ -363,8 +332,7 @@ const Contact = () => {
             Visit Our <span className="highlight">Office</span>
           </h2>
           <p className="gallery-intro">
-            Our travel experts are ready to welcome you to our office. Stop by
-            to discuss your travel plans in person.
+            Our travel experts are ready to welcome you to our office. Stop by to discuss your travel plans in person.
           </p>
           <div className="gallery-grid">
             <div className="gallery-item">
@@ -385,10 +353,7 @@ const Contact = () => {
         <div className="container">
           <div className="cta-content">
             <h2>Ready for Your Next Adventure?</h2>
-            <p>
-              Subscribe to our newsletter for exclusive travel deals and
-              inspiration.
-            </p>
+            <p>Subscribe to our newsletter for exclusive travel deals and inspiration.</p>
             <form className="newsletter-form">
               <input type="email" placeholder="Your email address" required />
               <button type="submit">Subscribe</button>
@@ -397,7 +362,7 @@ const Contact = () => {
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default Contact;
+export default Contact

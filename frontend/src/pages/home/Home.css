@@ -69,7 +69,25 @@
   height: 100vh;
   min-height: 600px;
   overflow: hidden;
-  perspective: 1px;
+}
+
+/* Fix for Slick slider to prevent horizontal movement */
+.hero-section-home .slick-slider,
+.hero-section-home .slick-list,
+.hero-section-home .slick-track {
+  height: 100%;
+}
+
+.hero-section-home .slick-slide {
+  margin: 0 !important;
+  float: none;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-section-home .slick-slide > div {
+  width: 100%;
 }
 
 .hero-slider-home {
@@ -80,6 +98,7 @@
   position: relative;
   height: 100vh;
   min-height: 600px;
+  width: 100% !important;
 }
 
 .hero-image-container-home {
@@ -88,8 +107,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transform: translateZ(-1px) scale(2);
-  will-change: transform;
 }
 
 .hero-image-home {
@@ -117,27 +134,30 @@
   width: 90%;
   max-width: 800px;
   z-index: 2;
+  padding: 0 20px;
 }
 
-.hero-content-home h1 {
-  font-size: 3.5rem;
+.slide-title-home {
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 700;
   margin-bottom: 20px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
 }
 
-.hero-content-home p {
-  font-size: 1.5rem;
+.slide-subtitle-home {
+  font-size: clamp(1rem, 3vw, 1.5rem);
   margin-bottom: 30px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  line-height: 1.4;
 }
 
 .cta-button-home {
   background-color: var(--primary-color);
   color: var(--text-light);
   border: none;
-  padding: 12px 30px;
-  font-size: 1.1rem;
+  padding: clamp(10px, 2vw, 12px) clamp(20px, 3vw, 30px);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
   font-weight: 600;
   border-radius: 50px;
   cursor: pointer;
@@ -147,7 +167,7 @@
   transition: var(--transition);
 }
 
-.cta-button:hover {
+.cta-button-home:hover {
   background-color: var(--primary-dark);
   transform: translateY(-2px);
 }
@@ -187,8 +207,9 @@
 .destinations-section {
   padding-top: 80px;
   background-color: var(--background-light);
-  margin-bottom: -180px; 
+  margin-bottom: -180px;
 }
+
 .destinations-slider {
   margin-bottom: 0;
 }
@@ -239,7 +260,7 @@
 }
 
 .destination-content h3 {
-  font-size: 1.3rem;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
   margin-bottom: 15px;
   color: var(--text-dark);
 }
@@ -256,6 +277,7 @@
   align-items: center;
   gap: 5px;
   color: var(--text-muted);
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
 }
 
 .star-icon {
@@ -273,6 +295,7 @@
   cursor: pointer;
   transition: var(--transition);
   background-color: var(--primary-color);
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
 }
 
 .view-button:hover {
@@ -315,23 +338,25 @@
 }
 
 .parallax-content-home h2 {
-  font-size: 3rem;
+  font-size: clamp(1.8rem, 4vw, 3rem);
   margin-bottom: 20px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
 }
 
 .parallax-content-home p {
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 2vw, 1.3rem);
   margin-bottom: 30px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  line-height: 1.4;
 }
 
 .parallax-button-home {
   background-color: var(--primary-color);
   color: var(--text-light);
   border: none;
-  padding: 12px 30px;
-  font-size: 1.1rem;
+  padding: clamp(10px, 2vw, 12px) clamp(20px, 3vw, 30px);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
   font-weight: 600;
   border-radius: 50px;
   cursor: pointer;
@@ -357,13 +382,14 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+
 }
 
 .feature-card {
   text-align: center;
   padding: 30px 20px;
   border-radius: 10px;
-  background-color: var(--background-light);
+  background-color: var(--text-light);
   transition: var(--transition);
 }
 
@@ -377,13 +403,14 @@
 }
 
 .feature-card h3 {
-  font-size: 1.3rem;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
   margin-bottom: 15px;
   color: var(--text-dark);
 }
 
 .feature-card p {
   color: var(--text-muted);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
 /* Categories Section */
@@ -419,7 +446,7 @@
 }
 
 .category-card h3 {
-  font-size: 1.3rem;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
   margin-bottom: 10px;
   color: var(--text-dark);
 }
@@ -427,6 +454,7 @@
 .category-card p {
   color: var(--text-muted);
   margin-bottom: 20px;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
 .category-link {
@@ -437,6 +465,7 @@
   font-weight: 600;
   text-decoration: none;
   transition: var(--transition);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
 .category-link:hover {
@@ -459,13 +488,14 @@
 }
 
 .offers-content h2 {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   color: var(--text-dark);
   margin-bottom: 15px;
+  line-height: 1.2;
 }
 
 .offers-content p {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   color: var(--text-muted);
   margin-bottom: 30px;
 }
@@ -483,13 +513,13 @@
 }
 
 .timer-number {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
   color: var(--primary-color);
 }
 
 .timer-label {
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem);
   color: var(--text-muted);
 }
 
@@ -497,8 +527,8 @@
   background-color: var(--primary-dark);
   color: var(--text-light);
   border: none;
-  padding: 12px 30px;
-  font-size: 1rem;
+  padding: clamp(10px, 2vw, 12px) clamp(20px, 3vw, 30px);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
   font-weight: 600;
   border-radius: 5px;
   cursor: pointer;
@@ -540,10 +570,7 @@
 .testimonial-content {
   background-color: var(--text-light);
   border-radius: 10px;
-  padding-left: 20px;
-  padding-right: 120px;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding: 50px 20px;
   box-shadow: var(--shadow);
   position: relative;
 }
@@ -560,24 +587,27 @@
 }
 
 .testimonial-text {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   color: var(--text-dark);
   position: relative;
   z-index: 1;
+  padding: 0 15px;
 }
 
 .testimonial-author {
   text-align: right;
+  margin-top: 20px;
+  padding-right: 15px;
 }
 
 .testimonial-author h4 {
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
   color: var(--text-dark);
   margin-bottom: 5px;
 }
 
 .testimonial-author p {
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem);
   color: var(--text-muted);
 }
 
@@ -596,12 +626,12 @@
 }
 
 .newsletter-content h2 {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   margin-bottom: 15px;
 }
 
 .newsletter-content p {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   margin-bottom: 30px;
   opacity: 0.9;
 }
@@ -617,7 +647,7 @@
   padding: 15px;
   border: none;
   border-radius: 5px 0 0 5px;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
 .newsletter-form input:focus {
@@ -633,6 +663,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
 .newsletter-form button:hover {
@@ -652,35 +683,78 @@
 }
 
 /* Slick Carousel Customizations */
-.slick-slide {
+/* Fix for hero slider to prevent horizontal movement */
+.hero-section-home .slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  user-select: none;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hero-section-home .slick-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  transform: translate3d(0, 0, 0);
+}
+
+.hero-section-home .slick-track {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transform: translate3d(0, 0, 0);
+}
+
+.hero-section-home .slick-slide {
+  display: none;
+  float: left;
+  height: 100%;
+  min-height: 1px;
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+.hero-section-home .slick-slide.slick-active,
+.hero-section-home .slick-slide.slick-current {
+  transform: none !important;
+}
+
+/* Destination slider customizations */
+.destinations-slider .slick-slide {
   margin: 0 15px;
   opacity: 0.8;
   transform: scale(0.9);
   transition: all 0.3s ease;
+  text-align: center !important;
 }
 
-.slick-slide.slick-active {
+.destinations-slider .slick-slide.slick-active {
   opacity: 1;
   transform: scale(1);
 }
 
-.slick-slide.slick-current {
+.destinations-slider .slick-slide.slick-current {
   transform: scale(1.05);
   z-index: 1;
+}
+
+/* Testimonial slider customizations */
+.testimonials-slider .slick-slide {
+  opacity: 1;
+  transform: none;
 }
 
 /* Responsive Styles */
 @media (max-width: 1200px) {
   .section-header h2 {
-    font-size: 2.2rem;
-  }
-
-  .hero-content h1 {
-    font-size: 3rem;
-  }
-
-  .hero-content p {
-    font-size: 1.3rem;
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
   }
 
   .offers-section {
@@ -708,11 +782,11 @@
     padding: 50px 0;
   }
 
-  .hero-section {
+  .hero-section-home {
     height: 80vh;
   }
 
-  .hero-slide {
+  .hero-slide-home {
     height: 80vh;
   }
 
@@ -729,26 +803,13 @@
   .newsletter-section {
     padding: 50px 0;
   }
+
+  .testimonial-content {
+    padding: 40px 15px;
+  }
 }
 
 @media (max-width: 768px) {
-  .section-header h2 {
-    font-size: 2rem;
-  }
-
-  .hero-content h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero-content p {
-    font-size: 1.1rem;
-  }
-
-  .cta-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-  }
-
   .features-container,
   .categories-container {
     grid-template-columns: 1fr;
@@ -768,24 +829,23 @@
   .newsletter-form button {
     width: 100%;
     border-radius: 5px;
-    padding: 12px;
-    font-size: 0.9rem;
+  }
+
+  .slider-arrow {
+    width: 35px;
+    height: 35px;
+  }
+
+  .slider-arrow-prev {
+    left: 10px;
+  }
+
+  .slider-arrow-next {
+    right: 10px;
   }
 }
 
 @media (max-width: 576px) {
-  .section-header h2 {
-    font-size: 1.8rem;
-  }
-
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .hero-content p {
-    font-size: 1rem;
-  }
-
   .destinations-section {
     padding-top: 40px;
     padding-bottom: 10px;
@@ -795,8 +855,29 @@
     padding: 40px 0;
   }
 
-  .newsletter-form input,
-  .newsletter-form button {
-    font-size: 0.8rem;
+  .hero-section-home {
+    height: 70vh;
+    min-height: 500px;
+  }
+
+  .hero-slide-home {
+    height: 70vh;
+    min-height: 500px;
+  }
+
+  .parallax-section-home {
+    height: 400px;
+    background-attachment: scroll; /* Fix for mobile parallax */
+  }
+
+  .testimonial-content {
+    padding: 30px 15px;
+  }
+}
+
+/* Fix for iOS devices */
+@supports (-webkit-touch-callout: none) {
+  .parallax-section-home {
+    background-attachment: scroll;
   }
 }
