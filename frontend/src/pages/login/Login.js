@@ -56,7 +56,7 @@ const Login = () => {
     if (validateForm()) {
       try {
         // Make a POST request to the login endpoint
-        const response = await axios.post("https://wander-lust-trails.vercel.app/api/user/login", formData, {
+        const response = await axios.post("http://localhost:5000/api/user/login", formData, {
           withCredentials: true, // Send cookies with the request
         });
 
