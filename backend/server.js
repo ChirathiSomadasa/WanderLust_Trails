@@ -11,7 +11,8 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors({ origin: "https://wander-lust-trails-ia8n.vercel.app/", credentials: true }));
+// Middleware
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
