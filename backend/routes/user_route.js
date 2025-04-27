@@ -83,7 +83,6 @@ router.post("/logout", (req, res) => {
     // Clear the HTTP-only cookie containing the JWT token
     res.clearCookie('auth_token', {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // Set to false for development
       sameSite: 'strict',
       path: '/',
     });
