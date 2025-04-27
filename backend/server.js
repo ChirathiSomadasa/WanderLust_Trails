@@ -11,7 +11,10 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({
+  origin: process.env.CLIENT_URL,  //Now dynamic based on environment
+  credentials: true
+}));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -25,8 +28,13 @@ mongoose
 app.use("/api/user", userRoute);
 app.use("/api/contact", contactRoute);
 
-// Start the server
+// Start the server only if NOT in production (for local development)
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => {
+    console.log(`Server running locally on port ${PORT}`);
+  });
+}
+
+// For Vercel serverless function
+module.exports = app;
