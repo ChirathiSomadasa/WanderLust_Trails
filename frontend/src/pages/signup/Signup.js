@@ -37,14 +37,48 @@ function Signup() {
     setServerError(""); // Clear server error when user changes input
   };
 
+  const validateForm = () => {
+    let formErrors = {};
+
+    if (!formData.first_name) {
+      formErrors.first_name = "First name is required";
+    }
+
+    if (!formData.last_name) {
+      formErrors.last_name = "Last name is required";
+    }
+
+    if (!formData.email) {
+      formErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      formErrors.email = "Email address is invalid";
+    }
+
+    if (!formData.password) {
+      formErrors.password = "Password is required";
+    } else if (formData.password.length < 6) {
+      formErrors.password = "Password must be at least 6 characters long";
+    }
+
+    return formErrors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      // Make a POST request to the registration endpoint
-      await axios.post("https://wander-lust-trails-backend.vercel.app/api/user/register", formData);
-      navigate("/login"); // Redirect to login after successful registration
-    } catch (err) {
-      setServerError(err.response?.data?.error || "Registration failed"); // Use setServerError here
+
+    // Validate form data
+    const formErrors = validateForm();
+    setErrors(formErrors);
+
+    // If there are no errors, proceed with the form submission
+    if (Object.keys(formErrors).length === 0) {
+      try {
+        // Make a POST request to the registration endpoint
+        await axios.post("https://wander-lust-trails-backend.vercel.app/api/user/register", formData);
+        navigate("/login"); // Redirect to login after successful registration
+      } catch (err) {
+        setServerError(err.response?.data?.error || "Registration failed");
+      }
     }
   };
 
@@ -175,6 +209,7 @@ function Signup() {
                   </button>
                 </div>
                 {errors.password && <span className="error-message">{errors.password}</span>}
+                <span className="password-hint">Use 6 or more characters</span>
               </div>
 
               <button type="submit" className="signup-button">

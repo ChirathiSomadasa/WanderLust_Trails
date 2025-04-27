@@ -80,8 +80,40 @@ const Contact = () => {
     }
   }
 
+  const validateForm = () => {
+    const newErrors = {}
+
+    // Validate name
+    if (!formData.name) {
+      newErrors.name = "Full name is required"
+    }
+
+    // Validate email
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+    if (!formData.email || !emailPattern.test(formData.email)) {
+      newErrors.email = "Valid email address is required"
+    }
+
+    // Validate subject
+    if (!formData.subject) {
+      newErrors.subject = "Subject is required"
+    }
+
+    // Validate message
+    if (!formData.message) {
+      newErrors.message = "Message is required"
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!validateForm()) {
+      return
+    }
+
     try {
       // Send form data to the backend
       const response = await fetch("https://wander-lust-trails-backend.vercel.app/api/contact/add", {
@@ -105,7 +137,7 @@ const Contact = () => {
         setFormData({
           name: "",
           email: "",
-          phone_number: "", // Reset phone_number
+          phone_number: "",
           subject: "",
           message: "",
         })
@@ -135,7 +167,6 @@ const Contact = () => {
       })
     }, 5000)
   }
-
   const contactInfo = [
     {
       icon: <MapPin />,
