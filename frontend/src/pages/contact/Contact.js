@@ -94,6 +94,10 @@ const Contact = () => {
       newErrors.email = "Valid email address is required"
     }
 
+    // Validate phone number
+    if (!formData.phone_number) {
+      newErrors.phone_number = "Phone number is required"
+    }
     // Validate subject
     if (!formData.subject) {
       newErrors.subject = "Subject is required"
@@ -294,7 +298,7 @@ const Contact = () => {
                     {errors.email && <span className="error-message">{errors.email}</span>}
                   </div>
                   <div className="form-group-contact">
-                    <label htmlFor="phone_number">Phone Number</label>
+                    <label htmlFor="phone_number">Phone Number*</label>
                     <input
                       type="tel"
                       id="phone_number"
@@ -302,7 +306,9 @@ const Contact = () => {
                       value={formData.phone_number}
                       onChange={handleChange}
                       placeholder="Your phone number"
+                      className={errors.phone_number ? "error" : ""}
                     />
+                    {errors.phone_number && <span className="error-message">{errors.phone_number}</span>}
                   </div>
                 </div>
                 <div className="form-group-contact">
