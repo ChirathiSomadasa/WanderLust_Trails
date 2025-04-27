@@ -142,10 +142,10 @@ const About = () => {
           <h3>Meet Our Team</h3>
           <div className="team-grid">
             {[
-              { name: "Derek Horton", role: "Founder & CEO", img: team1 }, 
-              { name: "Sarah Johnson", role: "Head of Destinations", img: team2 },
-              { name: "Andy Bowen", role: "Customer Experience", img: team3 },
-              { name: "Brenda Sherman", role: "Adventure Specialist", img: team4 },
+              { name: "Nadira Fernando", role: "Founder & CEO", img: team1 }, 
+              { name: "Saniya Rajapaksha", role: "Head of Destinations", img: team2 },
+              { name: "Kavindu Perera", role: "Customer Experience", img: team3 },
+              { name: "Dilani Senanayake", role: "Adventure Specialist", img: team4 },
             ].map((member, index) => (
               <div className="team-member fade-in" key={index} ref={(el) => (teamMembersRef.current[index] = el)}>
                 <div className="member-photo">

@@ -175,7 +175,6 @@ function Signup() {
                   </button>
                 </div>
                 {errors.password && <span className="error-message">{errors.password}</span>}
-                <span className="password-hint">Use 6 or more characters with a mix of letters, numbers & symbols</span>
               </div>
 
               <button type="submit" className="signup-button">

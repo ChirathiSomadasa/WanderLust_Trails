@@ -80,7 +80,7 @@ function Footer() {
                   <Link to="/careers">Careers</Link>
                 </li>
                 <li>
-                  <Link to="/sustainability">Sustainability</Link>
+                  <Link to="/Services">Services</Link>
                 </li>
               </ul>
             </div>
@@ -103,11 +103,11 @@ function Footer() {
         <div className="footer-contact">
           <div className="contact-item">
             <MapPin size={18} />
-            <span>123 Adventure Road, Travel City</span>
+            <span>No. 456, Galle Road, Colombo 03,Sri Lanka</span>
           </div>
           <div className="contact-item">
             <Phone size={18} />
-            <span>+1 (555) 123-4567</span>
+            <span>+94 112426901</span>
           </div>
           <div className="contact-item">
             <Mail size={18} />
