@@ -77,11 +77,11 @@ function Footer() {
                   <Link to="/contact">Contact</Link>
                 </li>
                 <li>
-                  <Link to="/careers">Careers</Link>
+                  <Link to="/services">Services</Link>
                 </li>
                 <li>
-                  <Link to="/Services">Services</Link>
-                </li>
+                  <Link to="/careers">Careers</Link>
+                </li>               
               </ul>
             </div>
           </div>
