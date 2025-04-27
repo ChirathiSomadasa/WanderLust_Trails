@@ -84,7 +84,7 @@ const Contact = () => {
     e.preventDefault()
     try {
       // Send form data to the backend
-      const response = await fetch("http://localhost:5000/api/contact/add", {
+      const response = await fetch("https://wander-lust-trails-backend.vercel.app/api/contact/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

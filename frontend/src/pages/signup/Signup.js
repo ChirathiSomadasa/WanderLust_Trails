@@ -41,7 +41,7 @@ function Signup() {
     e.preventDefault();
     try {
       // Make a POST request to the registration endpoint
-      await axios.post("http://localhost:5000/api/user/register", formData);
+      await axios.post("https://wander-lust-trails-backend.vercel.app/api/user/register", formData);
       navigate("/login"); // Redirect to login after successful registration
     } catch (err) {
       setServerError(err.response?.data?.error || "Registration failed"); // Use setServerError here
